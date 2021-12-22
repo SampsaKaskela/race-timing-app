@@ -6,6 +6,7 @@ describe('utils', () => {
 
         it('should format empty time', () => {
             expect(formatTime(0)).toBe('--:--.---')
+            expect(formatTime(null)).toBe('--:--.---')
         })
 
         it('should format positive times', () => {
@@ -41,6 +42,12 @@ describe('utils', () => {
     })
 
     describe('getTotalTime', () => {
+
+        it('should return 0 if contains 0', () => {
+            expect(getTotalTime([0, 1000, 1000])).toBe(0)
+            expect(getTotalTime([2000, 0, 1000])).toBe(0)
+            expect(getTotalTime([3000, 0, 1000])).toBe(0)
+        })
 
         it('should return sum of values in array', () => {
             expect(getTotalTime([1000, 1000, 1000])).toBe(3000)

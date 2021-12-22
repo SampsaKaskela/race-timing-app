@@ -1,5 +1,5 @@
 export const formatTime = (ms) => {
-    if (ms === 0) {
+    if (ms == null || ms === 0) {
         return '--:--.---'
     }
     const floor = ms < 0 ? Math.ceil : Math.floor
@@ -22,5 +22,8 @@ export const getTimeDifference = (time1ms, time2ms) => {
 }
 
 export const getTotalTime = (splits) => {
+    if (splits.includes(0)) {
+        return 0
+    }
     return splits.reduce((accumulator, a) => accumulator + a, 0)
 }
