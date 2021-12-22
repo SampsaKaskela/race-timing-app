@@ -24,7 +24,7 @@ table tr:hover {
 table th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: center;
-    background-color: #0079cd;
-    color: black;
+    text-align: left;
+    background-color: #006EA0;
+    color: white;
 }

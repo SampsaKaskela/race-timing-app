@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    width: 100%;
+    background: #006EA0;
+    color: white;
+    padding: 0 24px;
+}
+
+.header .title {
+    flex-grow: 1;
+    font-size: 2em;
+}
+
+.header input {
+    width: 300px;
+}
