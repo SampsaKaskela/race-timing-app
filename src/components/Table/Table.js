@@ -1,5 +1,5 @@
 import './Table.css'
-import { useTable, useSortBy, useFlexLayout  } from 'react-table'
+import { useTable, useSortBy, useFlexLayout } from 'react-table'
 
 const Table = ({ data, columns }) => {
     const {
