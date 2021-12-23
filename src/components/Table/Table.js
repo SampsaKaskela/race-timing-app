@@ -1,29 +1,30 @@
 import './Table.css'
 import { useMemo } from 'react'
 import { COLUMNS } from './Columns'
-import { useTable, useSortBy  } from 'react-table'
+import { useTable, useSortBy, useFlexLayout  } from 'react-table'
 import Data from './Data'
 
 
 const Table = () => {
 
-
     const columns = useMemo(() => COLUMNS, [])
     const data = useMemo(() => Data, [])
 
 
-    const tableInstance = useTable({
-        columns,
-        data,
-    },
-    useSortBy)
-
-    const { getTableProps,
+    const {
+        getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
-        prepareRow
-    } = tableInstance
+        prepareRow,
+    } = useTable(
+        {
+            columns,
+            data,
+        },
+        useSortBy,
+        useFlexLayout
+    )
 
     return (
         <div className='table-container'>
@@ -34,10 +35,10 @@ const Table = () => {
 
                             <tr {...headerGroups.getHeaderGroupProps()}>
                                 {headerGroups.headers.map( (column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    <th   {...column.getHeaderProps(column.getSortByToggleProps())}
+                                        onClick={() => column.toggleSortBy(!column.isSortedDesc)} >
                                         {column.render('Header')}</th>
                                 ))}
-
                             </tr>
 
                         ))
