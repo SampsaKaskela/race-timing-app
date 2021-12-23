@@ -29,6 +29,13 @@ const Table = ({ data, columns }) => {
                                     onClick={() => column.toggleSortBy(!column.isSortedDesc)}
                                 >
                                     {column.render('Header')}
+                                    <span>
+                                        {column.isSorted
+                                            ? column.isSortedDesc
+                                                ? ' 🔽'
+                                                : ' 🔼'
+                                            : ''}
+                                    </span>
                                 </th>
                             ))}
                         </tr>
