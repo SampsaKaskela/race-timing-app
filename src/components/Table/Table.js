@@ -33,6 +33,7 @@ const Table = ({ data, columns }) => {
                             ))}
                         </tr>
                     ))}
+
                 </thead>
                 <tbody {...getTableBodyProps()}>
                     {rows.map((row) => {
