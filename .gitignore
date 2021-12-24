@@ -29,4 +29,5 @@ yarn-error.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
-src/components/Table/Data.js
+
+Data.js

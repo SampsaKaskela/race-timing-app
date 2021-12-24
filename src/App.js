@@ -1,9 +1,10 @@
 import './App.css'
+import { useMemo } from 'react'
 import useFetch from './hooks/useFetch'
 import useInterval from './hooks/useInterval'
 import Table from './components/Table/Table'
 import Header from './components/Header/Header'
-import { formatTime, getTotalTime } from './utils'
+import { formatTime, getTotalTime, getFastestTime, getTimeDifference } from './utils'
 import Data from './Data'
 
 const getColumns = (data) => {
@@ -26,9 +27,8 @@ const getColumns = (data) => {
         })),
         {
             Header: 'Time',
-            accessor: 'splits',
-            Cell: ({ value }) => formatTime(getTotalTime(value)),
-            width: 110,
+            accessor: 'time',
+            width: 110
         }
     ]
 }
@@ -37,11 +37,22 @@ const App = () => {
     const { data, url, setUrl, refresh } = useFetch('')
     useInterval(refresh, 5000)
 
+    const results = useMemo(() => {
+        const fastest = getFastestTime(Data)
+        return Data.map((result) => {
+            const totalTime = getTotalTime(result.splits)
+            return {
+                ...result,
+                time: `${formatTime(totalTime)} ${getTimeDifference(totalTime, fastest)}`
+            }
+        })
+    }, [])
+
     return (
         <>
             <Header url={url} setUrl={setUrl} />
             <main>
-                <Table data={Data} columns={getColumns(Data)} />
+                <Table data={results} columns={getColumns(Data)} />
             </main>
         </>
     )

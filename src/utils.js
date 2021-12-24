@@ -14,7 +14,7 @@ export const formatTime = (ms) => {
 
 export const getTimeDifference = (time1ms, time2ms) => {
     const difference = time1ms - time2ms
-    if (difference === 0) {
+    if (time1ms === 0 || time2ms === 0 || difference === 0) {
         return ''
     }
     const prefix = time1ms < time2ms ? '-' : '+'
@@ -26,4 +26,18 @@ export const getTotalTime = (splits) => {
         return 0
     }
     return splits.reduce((accumulator, a) => accumulator + a, 0)
+}
+
+export const getFastestTime = (results) => {
+    let fastestTime = Infinity
+    for (const result of results) {
+        const totalTime = getTotalTime(result.splits)
+        if (totalTime === 0) {
+            continue
+        }
+        if (totalTime < fastestTime) {
+            fastestTime = totalTime
+        }
+    }
+    return fastestTime
 }

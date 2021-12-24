@@ -2,6 +2,7 @@ import './Table.css'
 import { useTable, useSortBy, useFlexLayout, useRef } from 'react-table'
 import { CSVLink } from 'react-csv'
 
+
 const Table = ({ data, columns }) => {
     const {
         getTableProps,
