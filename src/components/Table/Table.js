@@ -1,5 +1,6 @@
 import './Table.css'
-import { useTable, useSortBy, useFlexLayout  } from 'react-table'
+import { useTable, useSortBy, useFlexLayout, useRef } from 'react-table'
+import { CSVLink } from 'react-csv'
 
 const Table = ({ data, columns }) => {
     const {
@@ -17,9 +18,25 @@ const Table = ({ data, columns }) => {
         useFlexLayout
     )
 
+    const headers = [
+        { label: 'Driver', key: 'driver' },
+        { label: 'Number', key: 'number' },
+        { label: 'Splits', key: 'splits' },
+        { label: 'Time', key:  '' }
+    ]
+
+    const csvReport = {
+        filename: 'Data.csv',
+        headers: headers,
+        data: data
+    }
+
+
     return (
         <div className='table-container'>
-            <table {...getTableProps()}>
+            <CSVLink {...csvReport}>Export to CSV</CSVLink>
+            <table {...getTableProps()}
+            >
                 <thead>
                     {headerGroups.map((headerGroups) => (
                         <tr {...headerGroups.getHeaderGroupProps()}>
@@ -29,6 +46,7 @@ const Table = ({ data, columns }) => {
                                     onClick={() => column.toggleSortBy(!column.isSortedDesc)}
                                 >
                                     {column.render('Header')}
+
                                     <span>
                                         {column.isSorted
                                             ? column.isSortedDesc
