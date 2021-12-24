@@ -5,7 +5,6 @@ import useInterval from './hooks/useInterval'
 import Table from './components/Table/Table'
 import Header from './components/Header/Header'
 import { formatTime, getTotalTime, getFastestTime, getTimeDifference } from './utils'
-import Data from './Data'
 
 const getColumns = (data) => {
     return [
@@ -34,26 +33,31 @@ const getColumns = (data) => {
 }
 
 const App = () => {
-    const { data, url, setUrl, refresh } = useFetch('')
+    const { data, url, setUrl, refresh } = useFetch(process.env.NODE_ENV === 'production' ? '' : '/results')
     useInterval(refresh, 5000)
 
     const results = useMemo(() => {
-        const fastest = getFastestTime(Data)
-        return Data.map((result) => {
+        if (!data) {
+            return []
+        }
+        const fastest = getFastestTime(data)
+        return data.map((result) => {
             const totalTime = getTotalTime(result.splits)
             return {
                 ...result,
                 time: `${formatTime(totalTime)} ${getTimeDifference(totalTime, fastest)}`
             }
         })
-    }, [])
+    }, [data])
 
     return (
         <>
             <Header data={results} url={url} setUrl={setUrl} />
-            <main>
-                <Table data={results} columns={getColumns(Data)} />
-            </main>
+            {results.length > 0 && (
+                <main>
+                    <Table data={results} columns={getColumns(results)} />
+                </main>
+            )}
         </>
     )
 }

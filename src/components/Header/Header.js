@@ -24,8 +24,8 @@ const formatData = (data) => {
 const Header = ({ url, setUrl, data }) => {
     const csvReport = {
         filename: 'results.csv',
-        headers: getHeaders(data),
-        data: formatData(data)
+        headers: data.length > 0 ? getHeaders(data) : [],
+        data: data.length > 0 ? formatData(data) : []
     }
     return (
         <header className='header'>

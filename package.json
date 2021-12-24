@@ -2,10 +2,13 @@
   "name": "race-timing-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "concurrently": "^6.5.1",
+    "express": "^4.17.2",
     "react": "^17.0.2",
     "react-csv": "^2.2.1",
     "react-dom": "^17.0.2",
@@ -14,12 +17,17 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently --kill-others-on-fail \"yarn run start:server\" \"yarn run start:client\"",
+    "start:client": "react-scripts start",
+    "start:server": "cd src && node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.jsx",
     "lint-fix": "eslint src --ext .js,.jsx --fix"
+  },
+  "resolutions": {
+      "react-error-overlay": "6.0.9"
   },
   "browserslist": {
     "production": [
