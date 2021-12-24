@@ -50,7 +50,7 @@ const App = () => {
 
     return (
         <>
-            <Header url={url} setUrl={setUrl} />
+            <Header data={results} url={url} setUrl={setUrl} />
             <main>
                 <Table data={results} columns={getColumns(Data)} />
             </main>

@@ -17,3 +17,10 @@
 .header input {
     width: 300px;
 }
+
+.csv {
+    color: white;
+    text-decoration: none;
+    margin-left: 1em;
+    font-weight: bold;
+}
