@@ -2,7 +2,6 @@ import './Table.css'
 import { useTable, useSortBy, useFlexLayout, useRef } from 'react-table'
 import { CSVLink } from 'react-csv'
 
-
 const Table = ({ data, columns }) => {
     const {
         getTableProps,
@@ -19,11 +18,11 @@ const Table = ({ data, columns }) => {
         useFlexLayout
     )
 
-    const headers = [
+    const headers =  [
         { label: 'Driver', key: 'driver' },
         { label: 'Number', key: 'number' },
-        { label: 'Splits', key: 'splits' },
-        { label: 'Time', key:  '' }
+        { label: 'Splits', key: `splits[${index}]` },
+        { label: 'Time', key:  'time' }
     ]
 
     const csvReport = {
