@@ -12,6 +12,7 @@ const Table = ({ data, columns }) => {
         {
             columns,
             data,
+            autoResetSortBy: false
         },
         useSortBy,
         useFlexLayout
@@ -19,8 +20,7 @@ const Table = ({ data, columns }) => {
 
     return (
         <div className='table-container'>
-            <table {...getTableProps()}
-            >
+            <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroups) => (
                         <tr {...headerGroups.getHeaderGroupProps()}>
@@ -30,7 +30,6 @@ const Table = ({ data, columns }) => {
                                     onClick={() => column.toggleSortBy(!column.isSortedDesc)}
                                 >
                                     {column.render('Header')}
-
                                     <span>
                                         {column.isSorted
                                             ? column.isSortedDesc
